@@ -15,30 +15,12 @@ describe('CarouselSlide', () => {
     );
   });
 
-  it('renders a <figure>', () => {
-    expect(wrapper.type()).toBe('figure');
-  });
-
-  it('renders an props.Img and a <figcaption> as children', () => {
-    expect(wrapper.childAt(0).type()).toBe(CarouselSlide.defaultProps.Img);
-    expect(wrapper.childAt(1).type()).toBe('figcaption');
-  });
-
-  it('passes `imgUrl` through to the <img>', () => {
-    const imgUrl = 'https://example.com/image.png';
-    wrapper.setProps({ imgUrl });
-    const img = wrapper.find(CarouselSlide.defaultProps.Img);
-    expect(img.prop('src')).toBe(imgUrl);
-  });
-
-  it('uses `description` and `attribution` as the <figcaption>', () => {
-    const description = 'A jaw-droppingly spectactular image';
-    const attribution = 'Trevor Burnham';
-    wrapper.setProps({ description, attribution });
-    expect(wrapper.find('figcaption').text()).toBe(
-      `${description} ${attribution}`
-    );
-    expect(wrapper.find('figcaption strong').text()).toBe(description);
+  it('renders correctly', () => {
+    wrapper.setProps({
+      description: 'Description',
+      attribution: 'Attribution',
+    });
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('passes other props through to the <figcaption>', () => {
@@ -61,13 +43,8 @@ describe('CarouselSlide', () => {
       );
     });
 
-    it('renders an <img> with the given src', () => {
-      expect(mounted.containsMatchingElement(<img src={imgUrl} />)).toBe(true);
-    });
-
-    it('has the expected static styles', () => {
-      expect(mounted).toHaveStyleRule('width', '100%');
-      expect(mounted).toHaveStyleRule('object-fit', 'cover');
+    it('renders correctly', () => {
+      expect(mounted.find('img')).toMatchSnapshot();
     });
 
     it('uses imgHeight as the height style property', () => {
