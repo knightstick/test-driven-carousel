@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import Carousel from '../Carousel';
 import CarouselButton from '../CarouselButton';
 import CarouselSlide from '../CarouselSlide';
+import { wrap } from 'module';
 
 describe('Carousel', () => {
   let wrapper;
@@ -94,5 +95,23 @@ describe('Carousel', () => {
     wrapper.setState({ slideIndex: 1 });
     slideProps = wrapper.find(CarouselSlide).props();
     expect(slideProps).toEqual({ ...CarouselSlide.defaultProps, ...slides[1] });
+  });
+
+  it('passes defaultImg and defaultImgHeight to the CarouselSlide', () => {
+    const defaultImg = () => 'test';
+    const defaultImgHeight = 1234;
+    wrapper.setProps({ defaultImg, defaultImgHeight });
+    expect(wrapper.find(CarouselSlide).prop('Img')).toBe(defaultImg);
+    expect(wrapper.find(CarouselSlide).prop('imgHeight')).toBe(
+      defaultImgHeight
+    );
+  });
+
+  it('allows individual slides to override Img and imgHeight', () => {
+    const Img = () => 'test';
+    const imgHeight = 1234;
+    wrapper.setProps({ slides: [{ ...slides[0], Img, imgHeight }] });
+    expect(wrapper.find(CarouselSlide).prop('Img')).toBe(Img);
+    expect(wrapper.find(CarouselSlide).prop('imgHeight')).toBe(imgHeight);
   });
 });
