@@ -9,7 +9,9 @@
     "lint": "eslint . && stylelint **/*.js",
     "format": "prettier-eslint --list-different **/*.js",
     "build": "webpack",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "husky": {
     "hooks": {
@@ -47,7 +49,11 @@
     "stylelint-processor-styled-components": "^1.5.1",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.2.1",
+    "@storybook/react": "^5.0.1",
+    "@storybook/addon-actions": "^5.0.1",
+    "@storybook/addon-links": "^5.0.1",
+    "@storybook/addons": "^5.0.1"
   },
   "dependencies": {
     "prop-types": "^15.6.2",
