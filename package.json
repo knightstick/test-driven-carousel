@@ -7,13 +7,13 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint . && stylelint **/*.js",
-    "format": "prettier-eslint",
+    "format": "prettier-eslint --list-different **/*.js",
     "build": "webpack",
     "start": "webpack-dev-server --open"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint && npm run format"
     }
   },
   "keywords": [],
